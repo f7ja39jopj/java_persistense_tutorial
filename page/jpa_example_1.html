@@ -18,6 +18,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Native Hibernate example 1" href="native_hibernate_example_1.html" />
     <link rel="prev" title="Welcome to documentation’s documentation!" href="../index.html" /> 
 </head>
 
@@ -44,6 +45,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#test">Test</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="native_hibernate_example_1.html">Native Hibernate example 1</a></li>
 </ul>
 
         </div>
@@ -139,16 +141,16 @@
 
 <span class="nd">@Entity</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="p">{</span>
-    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span> <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="p">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="p">;</span>
+  <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span> <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="p">;</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="p">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">name</span><span class="p">;</span>
-    <span class="p">}</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">;</span>
+  <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
-    <span class="p">}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -168,31 +170,31 @@
 <span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JPATest</span> <span class="p">{</span>
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">storeLoadMessage</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">EntityManagerFactory</span> <span class="n">emf</span> <span class="o">=</span> <span class="n">Persistence</span><span class="p">.</span><span class="na">createEntityManagerFactory</span><span class="p">(</span><span class="s">&quot;persistence_01&quot;</span><span class="p">);</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">EntityManager</span> <span class="n">em</span> <span class="o">=</span> <span class="n">emf</span><span class="p">.</span><span class="na">createEntityManager</span><span class="p">();</span>
-            <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">begin</span><span class="p">();</span>
-            <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">();</span>
-            <span class="n">person</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;John&quot;</span><span class="p">);</span>
-            <span class="n">em</span><span class="p">.</span><span class="na">persist</span><span class="p">(</span><span class="n">person</span><span class="p">);</span>
-            <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">commit</span><span class="p">();</span>
-            <span class="c1">// INSERT into MESSAGE (ID, TEXT) values (1, &#39;Hello World!&#39;)</span>
-            <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">begin</span><span class="p">();</span>
-            <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="n">em</span><span class="p">.</span><span class="na">createQuery</span><span class="p">(</span><span class="s">&quot;select m from Person m&quot;</span><span class="p">).</span><span class="na">getResultList</span><span class="p">();</span>
-            <span class="c1">// SELECT * from MESSAGE</span>
-            <span class="n">personList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">personList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Michael&quot;</span><span class="p">);</span>
-            <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">commit</span><span class="p">();</span>
-            <span class="c1">// UPDATE MESSAGE set TEXT = &#39;Hello World from JPA!&#39; where ID = 1</span>
-            <span class="n">assertAll</span><span class="p">(</span>
-                    <span class="p">()</span> <span class="o">-&gt;</span> <span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">personList</span><span class="p">.</span><span class="na">size</span><span class="p">()),</span>
-                    <span class="p">()</span> <span class="o">-&gt;</span> <span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Michael&quot;</span><span class="p">,</span> <span class="n">personList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getName</span><span class="p">()));</span>
-            <span class="n">em</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
-            <span class="n">emf</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
-        <span class="p">}</span>
+  <span class="nd">@Test</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">storeLoadMessage</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">EntityManagerFactory</span> <span class="n">emf</span> <span class="o">=</span> <span class="n">Persistence</span><span class="p">.</span><span class="na">createEntityManagerFactory</span><span class="p">(</span><span class="s">&quot;persistence_01&quot;</span><span class="p">);</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="n">EntityManager</span> <span class="n">em</span> <span class="o">=</span> <span class="n">emf</span><span class="p">.</span><span class="na">createEntityManager</span><span class="p">();</span>
+      <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">begin</span><span class="p">();</span>
+      <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">();</span>
+      <span class="n">person</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;John&quot;</span><span class="p">);</span>
+      <span class="n">em</span><span class="p">.</span><span class="na">persist</span><span class="p">(</span><span class="n">person</span><span class="p">);</span>
+      <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">commit</span><span class="p">();</span>
+      <span class="c1">// INSERT into MESSAGE (ID, TEXT) values (1, &#39;John&#39;)</span>
+      <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">begin</span><span class="p">();</span>
+      <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="n">em</span><span class="p">.</span><span class="na">createQuery</span><span class="p">(</span><span class="s">&quot;select m from Person m&quot;</span><span class="p">).</span><span class="na">getResultList</span><span class="p">();</span>
+      <span class="c1">// SELECT * from MESSAGE</span>
+      <span class="n">personList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">personList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Michael&quot;</span><span class="p">);</span>
+      <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">commit</span><span class="p">();</span>
+      <span class="c1">// UPDATE MESSAGE set TEXT = &#39;Michael&#39; where ID = 1</span>
+      <span class="n">assertAll</span><span class="p">(</span>
+          <span class="p">()</span> <span class="o">-&gt;</span> <span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">personList</span><span class="p">.</span><span class="na">size</span><span class="p">()),</span>
+          <span class="p">()</span> <span class="o">-&gt;</span> <span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Michael&quot;</span><span class="p">,</span> <span class="n">personList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getName</span><span class="p">()));</span>
+      <span class="n">em</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="n">emf</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
     <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -204,6 +206,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to documentation’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="native_hibernate_example_1.html" class="btn btn-neutral float-right" title="Native Hibernate example 1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

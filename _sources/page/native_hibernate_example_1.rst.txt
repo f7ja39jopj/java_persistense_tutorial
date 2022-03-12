@@ -1,0 +1,26 @@
+Native Hibernate example 1
+##########################
+
+gradle configuration
+********************
+
+.. literalinclude:: ../code/native_hibernate_example_1/gradle.build
+    :language: groovy
+
+hibernate configuration
+***********************
+
+.. literalinclude:: ../code/native_hibernate_example_1/hibernate.cfg.xml
+    :language: xml
+
+Person entity
+*************
+
+.. literalinclude:: ../code/native_hibernate_example_1/Person.java
+    :language: java
+
+Test
+****
+
+.. literalinclude:: ../code/native_hibernate_example_1/NativeHibernateTest.java
+    :language: java

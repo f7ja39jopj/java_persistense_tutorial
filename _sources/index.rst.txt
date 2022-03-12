@@ -10,6 +10,7 @@ Welcome to documentation's documentation!
     :maxdepth: 2
 
     page/jpa_example_1.rst
+    page/native_hibernate_example_1.rst
 
 
 Indices and tables
