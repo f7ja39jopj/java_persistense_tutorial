@@ -1,0 +1,26 @@
+JPA example 1
+#############
+
+gradle configuration
+********************
+
+.. literalinclude:: ../code/jpa_example_1/gradle.build
+    :language: groovy
+
+jpa configuration
+*****************
+
+.. literalinclude:: ../code/jpa_example_1/persistence.xml
+    :language: xml
+
+Person entity
+*************
+
+.. literalinclude:: ../code/jpa_example_1/Person.java
+    :language: java
+
+Test
+****
+
+.. literalinclude:: ../code/jpa_example_1/JPATest.java
+    :language: java
